@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dokkai - Cerita 1</title>
+  <link rel="stylesheet" href="asset/assetscss/style.css">
+  <style>
+    .dokkai-wrap{max-width:900px;margin:40px auto;background:var(--card);padding:20px;border-radius:14px;box-shadow:0 8px 30px var(--shadow);}
+    .story-box{background:rgba(255,255,255,0.6);padding:18px;border-radius:10px;border:1px solid rgba(0,0,0,0.03);font-size:18px;line-height:1.8;text-align:left}
+    .controls{display:flex;justify-content:space-between;margin-top:14px;gap:12px}
+    .controls .btn{min-width:140px}
+    .meta{font-size:14px;color:var(--text);margin-bottom:10px}
+  </style>
+</head>
+<body>
+  <div class="menu dokkai-wrap">
+    <h1>Dokkai — Cerita #1</h1>
+    <p class="meta">Berisi kanji + hiragana (furigana). Baca cerita lalu tekan <strong>Selanjutnya</strong>.</p>
+
+    <div class="story-box" id="storyBox">
+      <!-- Contoh cerita sederhana: kanji + furigana -->
+      <p>
+        <ruby><rb>春</rb><rt>はる</rt></ruby>の<ruby><rb>日</rb><rt>ひ</rt></ruby>、<ruby><rb>町</rb><rt>まち</rt></ruby>の小さな<ruby><rb>図書館</rb><rt>としょかん</rt></ruby>に行きました。<br>
+        そこには<ruby><rb>古</rb><rt>ふる</rt></ruby>い本がたくさんあり、私は<ruby><rb>静</rb><rt>しず</rt></ruby>かに読書をしました。<br>
+        窓から差し込む<ruby><rb>光</rb><rt>ひかり</rt></ruby>が暖かく、心が落ち着きました。
+      </p>
+
+      <hr>
+
+      <p>
+        <strong>Transliterasi (hiragana):</strong><br>
+        はるのひ、まちのちいさなとしょかんにいきました。そこにはふるいほんがたくさんあり、わたしはしずかによみました。まどからさしこむひかりがあたたかく、こころがおちつきました。
+      </p>
+    </div>
+
+    <div class="controls">
+      <a href="index.html" class="btn">⬅ Kembali</a>
+      <a id="nextBtn" class="btn">Selanjutnya ➜</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      // menuju halaman pemilihan: latihan atau quiz
+      window.location.href = 'dokkai-menu.html';
+    });
+  </script>
+</body>
+</html>

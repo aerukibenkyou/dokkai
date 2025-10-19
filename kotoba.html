@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kotoba – Dokkai 1</title>
+  <link rel="stylesheet" href="asset/assetscss/kotoba.css">
+</head>
+<body>
+
+  <button class="back-btn" href="index.html">← Kembali ke Menu Utama</button>
+
+  <h1>📝 Kotoba – Dokkai 1</h1>
+  <p>Klik flashcard untuk melihat artinya.</p>
+
+  <div id="cards"></div>
+
+  <script>
+    // Contoh kosakata dari teks dokkai (bisa ditambah)
+    const KOTOBA = [
+      { jp: "図書館（としょかん）", id: "Perpustakaan" },
+      { jp: "静か（しずか）", id: "Tenang" },
+      { jp: "光（ひかり）", id: "Cahaya" },
+      { jp: "窓（まど）", id: "Jendela" },
+      { jp: "思う（おもう）", id: "Berpikir / Merasa" },
+      { jp: "気持ち（きもち）", id: "Perasaan" },
+      { jp: "読む（よむ）", id: "Membaca" }
+    ];
+
+    const container = document.getElementById('cards');
+
+    KOTOBA.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'flashcard';
+      card.innerHTML = `
+        <div class="word">${item.jp}</div>
+        <div class="meaning">${item.id}</div>
+      `;
+      card.addEventListener('click', () => {
+        const meaning = card.querySelector('.meaning');
+        meaning.style.display = meaning.style.display === 'block' ? 'none' : 'block';
+      });
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>

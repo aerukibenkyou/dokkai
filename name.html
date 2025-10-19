@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Masukkan Nama - Tebak Gambar</title>
+  <link rel="stylesheet" href="asset/assetscss/style.css">
+  <style>
+    .name-box{
+      max-width:520px;
+      margin:48px auto;
+      background:var(--card);
+      padding:20px;
+      border-radius:12px;
+      text-align:center;
+      box-shadow:0 6px 20px var(--shadow);
+    }
+    .name-box input{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:2px solid rgba(0,0,0,0.06);
+      font-size:18px;
+      margin-bottom:12px;
+      outline:none;
+      font-family:inherit;
+    }
+    .name-box .btn{
+      display:inline-block;
+      padding:12px 20px;
+      border-radius:10px;
+      text-decoration:none;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu name-box">
+    <h1>Masukkan Nama Pemain</h1>
+    <p>Nama akan dipakai untuk menyimpan skor ke scoreboard.</p>
+    <input id="playerName" type="text" placeholder="Tulis namamu..." maxlength="30" />
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:8px;">
+      <a href="dokkai.html" id="saveBtn" class="btn">Simpan & Kembali</a>
+      <a  id="skipBtn" class="btn">Lewati</a>
+    </div>
+  </div>
+
+  <script src="asset/assetsjs/name.js"></script>
+</body>
+</html>
