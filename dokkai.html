@@ -11,15 +11,26 @@
     .controls{display:flex;justify-content:space-between;margin-top:14px;gap:12px}
     .controls .btn{min-width:140px}
     .meta{font-size:14px;color:var(--text);margin-bottom:10px}
+    /* Posisi tombol suara */
+    #soundToggle{
+      position:fixed;
+      top:15px;
+      right:15px;
+      font-size:24px;
+      cursor:pointer;
+      background:none;
+      border:none;
+    }
   </style>
 </head>
 <body>
+  <button id="soundToggle">🔊</button> <!-- tombol mute/unmute -->
+
   <div class="menu dokkai-wrap">
     <h1>Dokkai — Cerita #1</h1>
     <p class="meta">Berisi kanji + hiragana (furigana). Baca cerita lalu tekan <strong>Selanjutnya</strong>.</p>
 
     <div class="story-box" id="storyBox">
-      <!-- Contoh cerita sederhana: kanji + furigana -->
       <p>
         <ruby><rb>春</rb><rt>はる</rt></ruby>の<ruby><rb>日</rb><rt>ひ</rt></ruby>、<ruby><rb>町</rb><rt>まち</rt></ruby>の小さな<ruby><rb>図書館</rb><rt>としょかん</rt></ruby>に行きました。<br>
         そこには<ruby><rb>古</rb><rt>ふる</rt></ruby>い本がたくさんあり、私は<ruby><rb>静</rb><rt>しず</rt></ruby>かに読書をしました。<br>
@@ -36,15 +47,63 @@
 
     <div class="controls">
       <a href="index.html" class="btn">⬅ Kembali</a>
-      <a id="nextBtn" class="btn">Selanjutnya ➜</a>
+      <a href="dokkai-menu.html" class="btn">Selanjutnya ➜</a>
     </div>
   </div>
 
+  <!-- Tambahkan Audio -->
+  <audio id="bgm" src="music.mp3" loop></audio>
+  <audio id="clickSound" src="pop.mp3"></audio>
+
   <script>
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      // menuju halaman pemilihan: latihan atau quiz
-      window.location.href = 'dokkai-menu.html';
+    const bgm = document.getElementById('bgm');
+    const clickSound = document.getElementById('clickSound');
+    const toggleBtn = document.getElementById('soundToggle');
+    let soundEnabled = true;
+
+    // Autoplay musik setelah interaksi pertama
+    document.addEventListener('click', () => {
+      if (bgm.paused && soundEnabled) {
+        bgm.volume = 0.4;
+        bgm.play().catch(() => {});
+      }
+    }, { once: true });
+
+    // Tombol mute/unmute
+    toggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        toggleBtn.textContent = '🔊';
+        bgm.play().catch(()=>{});
+      } else {
+        toggleBtn.textContent = '🔇';
+        bgm.pause();
+      }
+      playClick();
     });
+
+    // Fungsi suara klik
+    function playClick() {
+      if (!soundEnabled) return;
+      clickSound.currentTime = 0;
+      clickSound.play().catch(()=>{});
+    }
+
+    // Efek suara ke semua tombol .btn
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const href = btn.getAttribute('href');
+        playClick();
+        if (href) {
+          e.preventDefault();
+          setTimeout(() => {
+            window.location.href = href;
+          }, 150);
+        }
+      });
+    });
+
+
   </script>
 </body>
 </html>

@@ -32,19 +32,108 @@
       text-decoration:none;
       cursor:pointer;
     }
+    .sound-btn{
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Tombol Sound -->
+  <button id="soundToggle" class="sound-btn">🔊</button>
+
   <div class="menu name-box">
     <h1>Masukkan Nama Pemain</h1>
     <p>Nama akan dipakai untuk menyimpan skor ke scoreboard.</p>
     <input id="playerName" type="text" placeholder="Tulis namamu..." maxlength="30" />
     <div style="display:flex;gap:12px;justify-content:center;margin-top:8px;">
       <a href="dokkai.html" id="saveBtn" class="btn">Simpan & Kembali</a>
-      <a  id="skipBtn" class="btn">Lewati</a>
+      <a href="dokkai.html" id="skipBtn" class="btn">Lewati</a>
     </div>
   </div>
 
-  <script src="asset/assetsjs/name.js"></script>
+  <!-- Musik & efek suara -->
+  <audio id="bgm" src="music.mp3" loop></audio>
+  <audio id="clickSound" src="pop.mp3"></audio>
+
+  <script>
+    const playerNameInput = document.getElementById('playerName');
+    const saveBtn = document.getElementById('saveBtn');
+    const skipBtn = document.getElementById('skipBtn');
+
+    // Simpan nama saat klik "Simpan & Kembali"
+    saveBtn.addEventListener('click', (e) => {
+      const name = playerNameInput.value.trim();
+      if (!name) {
+        alert("Nama tidak boleh kosong!");
+        e.preventDefault();
+        return;
+      }
+      localStorage.setItem('playerName', name);
+    });
+
+    // Lewati = setAnonymous
+    skipBtn.addEventListener('click', () => {
+      localStorage.setItem('playerName', 'Anonymous');
+    });
+
+    /* ====== Sistem Sound Sama Seperti Halaman Lain ====== */
+
+    const bgm = document.getElementById('bgm');
+    const clickSound = document.getElementById('clickSound');
+    const toggleBtn = document.getElementById('soundToggle');
+    let soundEnabled = true;
+
+    // Autoplay musik setelah klik pertama
+    document.addEventListener('click', () => {
+      if (bgm.paused && soundEnabled) {
+        bgm.volume = 0.4;
+        bgm.play().catch(() => {});
+      }
+    }, { once: true });
+
+    // Mute/unmute
+    toggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        toggleBtn.textContent = '🔊';
+        bgm.play().catch(() => {});
+      } else {
+        toggleBtn.textContent = '🔇';
+        bgm.pause();
+      }
+      playClick();
+    });
+
+    // Fungsi efek klik
+    function playClick() {
+      if (!soundEnabled) return;
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {});
+    }
+
+    // Tambahkan efek suara + delay redirect agar suara terdengar
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        playClick();
+
+        const href = btn.getAttribute('href');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 150);
+      });
+    });
+  </script>
+
 </body>
 </html>

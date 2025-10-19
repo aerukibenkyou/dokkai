@@ -62,3 +62,5 @@ resetBtn.addEventListener('click', () => {
 
 loadScores();
 
+
+

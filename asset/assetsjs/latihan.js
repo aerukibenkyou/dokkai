@@ -30,8 +30,13 @@
       btn.dataset.opt = i;
 
       btn.addEventListener('click', () => {
-        // ❌ yang lama: hanya hapus style, tidak hapus dataset.selected
-        // ✅ yang benar: hapus style DAN hapus dataset.selected
+
+        // ✅ MAINKAN SUARA KLIK
+        if (typeof playClick === 'function') {
+          playClick();
+        }
+
+        // Hapus style & selected dari semua opsi
         Array.from(opts.children).forEach(c => {
           c.style.borderColor = 'transparent';
           c.style.background = '';
@@ -39,6 +44,7 @@
           delete c.dataset.selected;
         });
 
+        // Style untuk opsi yang dipilih
         btn.style.borderColor = 'var(--accent)';
         btn.style.background = 'white';
         btn.style.fontWeight = '700';
@@ -88,7 +94,6 @@
       tanggal: new Date().toISOString()
     });
 
-    // ✅ perbaiki tampilan skor
     alert(`Nama: ${playerName || 'Anonymous'}\nSkor: ${score}/100\nHasil tersimpan di scoreboard.`);
     window.location.href = 'scoreboard.html';
   });

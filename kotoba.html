@@ -7,15 +7,56 @@
 </head>
 <body>
 
-  <button class="back-btn" href="index.html">← Kembali ke Menu Utama</button>
+  <button id="soundToggle" class="sound-btn">🔊</button>
 
   <h1>📝 Kotoba – Dokkai 1</h1>
   <p>Klik flashcard untuk melihat artinya.</p>
 
   <div id="cards"></div>
 
+  <div class="nav-buttons">
+    <a href="index.html" class="btn">🏠 Kembali ke Menu Utama</a>
+  </div>
+
+  <!-- Musik & efek suara -->
+  <audio id="bgm" src="music.mp3" loop></audio>
+  <audio id="clickSound" src="pop.mp3"></audio>
+
   <script>
-    // Contoh kosakata dari teks dokkai (bisa ditambah)
+    const bgm = document.getElementById('bgm');
+    const clickSound = document.getElementById('clickSound');
+    const toggleBtn = document.getElementById('soundToggle');
+    let soundEnabled = true;
+
+    // Autoplay musik setelah interaksi pertama
+    document.addEventListener('click', () => {
+      if (bgm.paused && soundEnabled) {
+        bgm.volume = 0.4;
+        bgm.play().catch(() => {});
+      }
+    }, { once: true });
+
+    // Tombol mute/unmute
+    toggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        toggleBtn.textContent = '🔊';
+        bgm.play().catch(()=>{});
+      } else {
+        toggleBtn.textContent = '🔇';
+        bgm.pause();
+      }
+      playClick();
+    });
+
+    // Fungsi mainkan efek pop
+    function playClick() {
+      if (!soundEnabled) return;
+      clickSound.currentTime = 0;
+      clickSound.play().catch(()=>{});
+    }
+
+    // Kosakata dari teks dokkai
     const KOTOBA = [
       { jp: "図書館（としょかん）", id: "Perpustakaan" },
       { jp: "静か（しずか）", id: "Tenang" },
@@ -38,9 +79,23 @@
       card.addEventListener('click', () => {
         const meaning = card.querySelector('.meaning');
         meaning.style.display = meaning.style.display === 'block' ? 'none' : 'block';
+        playClick();
       });
       container.appendChild(card);
     });
+
+    // Tambahkan efek suara dan delay ke semua tombol <a class="btn">
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();     // cegah pindah halaman langsung
+        playClick();            // mainkan suara
+        const href = btn.getAttribute('href');
+        setTimeout(() => {
+          window.location.href = href;  // pindah halaman setelah suara
+        }, 150); // delay 150ms
+      });
+    });
+    
   </script>
 
 </body>

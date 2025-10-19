@@ -9,9 +9,22 @@
     .wrap{max-width:720px;margin:48px auto;text-align:center;padding:24px;background:var(--card);border-radius:12px;box-shadow:0 8px 24px var(--shadow)}
     .wrap .btn{min-width:160px;padding:14px 20px}
     .row{display:flex;gap:12px;justify-content:center;margin-top:18px}
+    #soundToggle{
+      position:fixed;
+      top:15px;
+      right:15px;
+      font-size:24px;
+      cursor:pointer;
+      background:none;
+      border:none;
+    }
   </style>
 </head>
 <body>
+  
+  <!-- Tombol mute/unmute -->
+  <button id="soundToggle">🔊</button>
+
   <div class="menu wrap">
     <h1>Dokkai — Cerita #1</h1>
     <p>Pilih mode untuk cerita ini:</p>
@@ -25,5 +38,58 @@
       <a href="dokkai.html" class="btn">⬅ Kembali ke Cerita</a>
     </div>
   </div>
+
+  <!-- Audio -->
+  <audio id="bgm" src="music.mp3" loop></audio>
+  <audio id="clickSound" src="pop.mp3"></audio>
+
+  <script>
+    const bgm = document.getElementById('bgm');
+    const clickSound = document.getElementById('clickSound');
+    const toggleBtn = document.getElementById('soundToggle');
+    let soundEnabled = true;
+
+    // Autoplay musik setelah interaksi pertama
+    document.addEventListener('click', () => {
+      if (bgm.paused && soundEnabled) {
+        bgm.volume = 0.4;
+        bgm.play().catch(() => {});
+      }
+    }, { once: true });
+
+    // Tombol mute/unmute
+    toggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        toggleBtn.textContent = '🔊';
+        bgm.play().catch(()=>{});
+      } else {
+        toggleBtn.textContent = '🔇';
+        bgm.pause();
+      }
+      playClick();
+    });
+
+    // Fungsi suara klik
+    function playClick() {
+      if (!soundEnabled) return;
+      clickSound.currentTime = 0;
+      clickSound.play().catch(()=>{});
+    }
+
+    // Efek suara + delay pada semua tombol .btn
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const href = btn.getAttribute('href');
+        playClick();
+        if (href) {
+          e.preventDefault();
+          setTimeout(() => {
+            window.location.href = href;
+          }, 150);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
