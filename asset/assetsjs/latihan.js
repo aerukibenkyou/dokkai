@@ -1,107 +1,238 @@
-// latihan.js
+// latihan-tf.js
 (() => {
+  /* ============================
+     CONFIG: soal (True/False)
+     - Masukkan kalimat lengkap (bisa pakai <ruby>..</ruby>)
+     - correct: true => pernyataan benar, false => pernyataan salah
+  ============================ */
   const QUESTIONS = [
     {
-      q: "Di cerita, ke mana tokoh utama pergi?",
-      options: ["Sekolah", "Taman", "Perpustakaan", "Kantor"],
-      a: 2
+      // Soal 1 (contoh kamu)
+      q: '例1 （　　）　沖縄は　九州の　北に　あります。',
+      correct: false
     },
     {
-      q: "Apa yang membuat tokoh utama merasa tenang?",
-      options: ["Hujan deras", "Cahaya dari jendela", "Suara bising", "Makanan enak"],
-      a: 1
+      q: '例2 （　　）　旅行は　あまり　楽しくなかったです。',
+      correct: false
     }
+    // Tambah soal di sini bila perlu
   ];
 
+  /* ============================
+     AUDIO / SOUND SETUP (global-safe)
+     Jika elemen audio tidak ada di HTML, fungsi suara akan aman-senyap.
+  ============================ */
+  const bgm = document.getElementById ? document.getElementById('bgm') : null;
+  const clickSound = document.getElementById ? document.getElementById('clickSound') : null;
+  const toggleBtn = document.getElementById ? document.getElementById('soundToggle') : null;
+  let soundEnabled = true;
+
+  // autoplay bgm on first user interaction (if bgm exists)
+  if (typeof document !== 'undefined') {
+    document.addEventListener('click', () => {
+      if (bgm && bgm.paused && soundEnabled) {
+        try { bgm.volume = 0.4; bgm.play(); } catch (e) {}
+      }
+    }, { once: true });
+  }
+
+  // toggle button (if exists)
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        toggleBtn.textContent = '🔊';
+        if (bgm) try { bgm.play(); } catch (e) {}
+      } else {
+        toggleBtn.textContent = '🔇';
+        if (bgm) try { bgm.pause(); } catch (e) {}
+      }
+      playClick(); // beri feedback saat toggle
+    });
+  }
+
+  // fungsi global untuk memutar click (bisa dipanggil dari soal lain)
+  window.playClick = function playClick() {
+    if (!soundEnabled) return;
+    if (!clickSound) return;
+    try {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    } catch (e) {}
+  };
+
+  /* ============================
+     RENDER SOAL
+  ============================ */
   const qContainer = document.getElementById('qContainer');
+  if (!qContainer) {
+    console.warn('latihan-tf.js: elemen #qContainer tidak ditemukan — tidak ada yang dirender.');
+    return;
+  }
 
+  // poin per soal (bagi 100, sisanya ditambahkan ke soal pertama)
+  const basePoint = Math.floor(100 / QUESTIONS.length);
+  const remainder = 100 - basePoint * QUESTIONS.length; // tambahkan ke soal pertama
+
+  // store selections: null = belum pilih; true = pilih benar; false = pilih salah
+  const selections = new Array(QUESTIONS.length).fill(null);
+
+  // buat setiap soal
   QUESTIONS.forEach((item, idx) => {
-    const div = document.createElement('div');
-    div.className = 'question';
-    div.innerHTML = `<strong>Soal ${idx+1}.</strong> <div style="margin-top:8px">${item.q}</div>`;
+    const wrap = document.createElement('div');
+    wrap.className = 'question';
+    wrap.style.marginBottom = '12px';
+    wrap.style.padding = '10px';
+
+    // teks soal (boleh mengandung HTML seperti <ruby>..</ruby>)
+    const qHtml = document.createElement('div');
+    qHtml.innerHTML = `<strong>Soal ${idx + 1}.</strong> <div style="margin-top:8px">${item.q}</div>`;
+    wrap.appendChild(qHtml);
+
+    // tombol pilihan 〇 / × dengan label Jepang
     const opts = document.createElement('div');
-    opts.className = 'options';
+    opts.className = 'tf-options';
+    opts.style.marginTop = '8px';
+    opts.style.display = 'flex';
+    opts.style.gap = '8px';
+    opts.style.justifyContent = 'flex-start';
 
-    item.options.forEach((op, i) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.innerText = op;
-      btn.dataset.q = idx;
-      btn.dataset.opt = i;
+    const trueBtn = document.createElement('button');
+    trueBtn.type = 'button';
+    trueBtn.className = 'tf-btn tf-true';
+    trueBtn.innerHTML = '〇 <span style="margin-left:6px">正しい</span>';
+    trueBtn.style.padding = '10px 14px';
+    trueBtn.style.borderRadius = '8px';
+    trueBtn.style.cursor = 'pointer';
+    trueBtn.style.fontWeight = '700';
+    trueBtn.dataset.value = 'true';
 
-      btn.addEventListener('click', () => {
+    const falseBtn = document.createElement('button');
+    falseBtn.type = 'button';
+    falseBtn.className = 'tf-btn tf-false';
+    falseBtn.innerHTML = '× <span style="margin-left:6px">間違い</span>';
+    falseBtn.style.padding = '10px 14px';
+    falseBtn.style.borderRadius = '8px';
+    falseBtn.style.cursor = 'pointer';
+    falseBtn.style.fontWeight = '700';
+    falseBtn.dataset.value = 'false';
 
-        // ✅ MAINKAN SUARA KLIK
-        if (typeof playClick === 'function') {
-          playClick();
-        }
+    // klik handler
+    function handleSelect(valueBool) {
+      // mainkan klik
+      if (typeof window.playClick === 'function') window.playClick();
 
-        // Hapus style & selected dari semua opsi
-        Array.from(opts.children).forEach(c => {
-          c.style.borderColor = 'transparent';
-          c.style.background = '';
-          c.style.fontWeight = 'normal';
-          delete c.dataset.selected;
-        });
+      // simpan pilihan
+      selections[idx] = valueBool;
 
-        // Style untuk opsi yang dipilih
-        btn.style.borderColor = 'var(--accent)';
-        btn.style.background = 'white';
-        btn.style.fontWeight = '700';
-        btn.dataset.selected = '1';
+      // styling: reset sibling buttons
+      [trueBtn, falseBtn].forEach(b => {
+        b.style.border = '2px solid transparent';
+        b.style.background = '';
+        b.style.color = '';
       });
 
-      opts.appendChild(btn);
-    });
+      // tandai yang dipilih
+      const chosenBtn = valueBool ? trueBtn : falseBtn;
+      chosenBtn.style.border = '2px solid #f7bfd8';
+      chosenBtn.style.background = '#fff';
+      chosenBtn.style.color = '#000';
+    }
 
-    div.appendChild(opts);
-    qContainer.appendChild(div);
+    trueBtn.addEventListener('click', () => handleSelect(true));
+    falseBtn.addEventListener('click', () => handleSelect(false));
+
+    opts.appendChild(trueBtn);
+    opts.appendChild(falseBtn);
+
+    wrap.appendChild(opts);
+    qContainer.appendChild(wrap);
   });
 
-  document.getElementById('submitBtn').addEventListener('click', () => {
+  /* ============================
+     SUBMIT: hitung skor, simpan, tampilkan
+  ============================ */
+  const submitBtn = document.getElementById('submitBtn');
+  if (!submitBtn) {
+    console.warn('latihan-tf.js: elemen #submitBtn tidak ditemukan — tidak bisa submit.');
+    return;
+  }
+
+  submitBtn.addEventListener('click', (e) => {
+    // mainkan click sound untuk tombol submit
+    if (typeof window.playClick === 'function') window.playClick();
+
+    // hitung skor
     let score = 0;
-    const answers = [];
+    const answers = []; // simpan pilihan tiap soal: true/false/null
 
-    const qDivs = qContainer.querySelectorAll('.question');
-    qDivs.forEach((qd, idx) => {
-      const btns = qd.querySelectorAll('button');
-      let chosen = -1;
-      btns.forEach(b => {
-        if (b.dataset.selected === '1') chosen = Number(b.dataset.opt);
-      });
-      answers.push(chosen);
+    for (let i = 0; i < QUESTIONS.length; i++) {
+      const sel = selections[i]; // true/false/null
+      answers.push(sel === null ? null : !!sel);
 
-      // ✅ +50 poin jika benar
-      if (chosen === QUESTIONS[idx].a) score += 50;
-    });
+      // hitung poin jika dipilih
+      if (sel !== null) {
+        const isCorrect = (sel === !!QUESTIONS[i].correct);
+        // poin untuk soal i:
+        let points = basePoint;
+        if (i === 0) points += remainder; // tambahkan sisa ke soal pertama
+        if (isCorrect) score += points;
+      }
+    }
 
+    // Jika ada soal belum dijawab, tanyakan apakah lanjut simpan
+    const unanswered = answers.filter(a => a === null).length;
+    if (unanswered > 0) {
+      const proceed = confirm(`Ada ${unanswered} soal belum dijawab. Lanjutkan dan simpan jawaban yang ada?`);
+      if (!proceed) return;
+    }
+
+    // pastikan nama pemain
     const playerName = localStorage.getItem('playerName') || '';
     if (!playerName) {
-      if (!confirm('Nama belum diisi. Ke halaman isi nama sekarang?')) {
-        // lanjut dengan Anonymous
-      } else {
-        window.location.href = 'name.html';
+      if (confirm('Nama belum diisi. Pergi ke halaman isi nama sekarang?')) {
+        // pindah ke halaman isi nama
+        window.location.href = './name.html';
         return;
       }
     }
 
-    saveScore({
+    // simpan ke localStorage (format seperti sebelumnya)
+    const entry = {
       nama: playerName || 'Anonymous',
-      tipe: 'Latihan Dokkai 1',
-      score,
+      tipe: 'Latihan Dokkai 1 (TF)',
+      score: score,
       max: 100,
       detail: answers,
       tanggal: new Date().toISOString()
-    });
+    };
 
-    alert(`Nama: ${playerName || 'Anonymous'}\nSkor: ${score}/100\nHasil tersimpan di scoreboard.`);
-    window.location.href = 'scoreboard.html';
-  });
-
-  function saveScore(entry) {
     const raw = localStorage.getItem('scores');
-    let arr = raw ? JSON.parse(raw) : [];
+    const arr = raw ? JSON.parse(raw) : [];
     arr.push(entry);
     localStorage.setItem('scores', JSON.stringify(arr));
-  }
+
+    // tampilkan hasil ringkas
+    alert(`Nama: ${entry.nama}\nSkor: ${entry.score}/${entry.max}\nHasil tersimpan di scoreboard.`);
+
+    // redirect ke scoreboard
+    window.location.href = './scoreboard.html';
+  });
+
+  /* ============================
+     Tambahkan efek suara & delay untuk semua link .btn (jika ada)
+  ============================ */
+  document.querySelectorAll && document.querySelectorAll('a.btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+      if (typeof window.playClick === 'function') window.playClick();
+      if (href) {
+        e.preventDefault();
+        setTimeout(() => { window.location.href = href; }, 150);
+      }
+    });
+  });
+
+  // siap
+  console.log('latihan-tf.js: siap. Soal jumlah =', QUESTIONS.length, 'poin/soal (base) =', basePoint, 'remainder =', remainder);
 })();

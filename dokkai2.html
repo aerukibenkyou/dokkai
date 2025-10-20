@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dokkai - わたしのしゅみ</title>
+  <link rel="stylesheet" href="asset/assetscss/style.css">
+  <style>
+    .dokkai-wrap{max-width:900px;margin:40px auto;background:var(--card);padding:20px;border-radius:14px;box-shadow:0 8px 30px var(--shadow);}
+    .story-box{background:rgba(255,255,255,0.6);padding:18px;border-radius:10px;border:1px solid rgba(0,0,0,0.03);font-size:18px;line-height:1.8;text-align:left}
+    .controls{display:flex;justify-content:space-between;margin-top:14px;gap:12px}
+    .controls .btn{min-width:140px}
+    .meta{font-size:14px;color:var(--text);margin-bottom:10px}
+    #soundToggle{
+      position:fixed;
+      top:15px;
+      right:15px;
+      font-size:24px;
+      cursor:pointer;
+      background:none;
+      border:none;
+    }
+  </style>
+</head>
+<body>
+  <button id="soundToggle">🔊</button>
+
+  <div class="menu dokkai-wrap">
+    <h1>Dokkai — わたしのしゅみ</h1>
+    <p class="meta">Berisi kanji + hiragana (furigana). Baca cerita lalu tekan <strong>Selanjutnya</strong>.</p>
+
+    <div class="story-box" id="storyBox">
+      <p>
+        私の<ruby><rb>趣味</rb><rt>しゅみ</rt></ruby>はサッカーです。<br>
+        <ruby><rb>小</rb><rt>ちい</rt></ruby>さいころからサッカーを<ruby><rb>見</rb><rt>み</rt></ruby>ることが<ruby><rb>好</rb><rt>す</rt></ruby>きで、<br>
+        今も<ruby><rb>友</rb><rt>とも</rt></ruby>だちと<ruby><rb>毎週</rb><rt>まいしゅう</rt></ruby><ruby><rb>一緒</rb><rt>いっしょ</rt></ruby>に<ruby><rb>練習</rb><rt>れんしゅう</rt></ruby>しています。<br>
+        サッカーをすると、ストレスがなくなって、とても<ruby><rb>気持</rb><rt>きも</rt></ruby>ちがいいです。
+      </p>
+
+      <p>
+        サッカーのほかに、<ruby><rb>音楽</rb><rt>おんがく</rt></ruby>を<ruby><rb>聞</rb><rt>き</rt></ruby>くことも<ruby><rb>大好</rb><rt>だいす</rt></ruby>きです。<br>
+        とくに<ruby><rb>日本</rb><rt>にほん</rt></ruby>のポップスが<ruby><rb>好</rb><rt>す</rt></ruby>きで、よくスマホで<ruby><rb>聞</rb><rt>き</rt></ruby>きます。<br>
+        しずかな<ruby><rb>音楽</rb><rt>おんがく</rt></ruby>を<ruby><rb>聞</rb><rt>き</rt></ruby>くと、べんきょうのあとに<ruby><rb>疲</rb><rt>つか</rt></ruby>れがとれます。
+      </p>
+
+      <p>
+        これからは、ピアノを<ruby><rb>弾</rb><rt>ひ</rt></ruby>くことにもチャレンジしたいと<ruby><rb>思</rb><rt>おも</rt></ruby>います。<br>
+        サッカーや<ruby><rb>音楽</rb><rt>おんがく</rt></ruby>をとおして、たくさんの<ruby><rb>人</rb><rt>ひと</rt></ruby>と<ruby><rb>出会</rb><rt>であ</rt></ruby>い、<br>
+        <ruby><rb>毎日</rb><rt>まいにち</rt></ruby>をもっと<ruby><rb>楽</rb><rt>たの</rt></ruby>しくしたいです。
+      </p>
+
+      <hr>
+
+      <p>
+        <strong>Transliterasi (hiragana):</strong><br>
+        わたしのしゅみはさっかーです。ちいさいころからさっかーをみることがすきで、いまもともだちとまいしゅういっしょにれんしゅうしています。さっかーをすると、すとれすがなくなって、とてもきもちがいいです。<br><br>
+        さっかーのほかに、おんがくをきくこともだいすきです。とくににほんのぽっぷすがすきで、よくすまほでききます。しずかなおんがくをきくと、べんきょうのあとにつかれがとれます。<br><br>
+        これからは、ぴあのをひくことにもちゃれんじしたいとおもいます。さっかーやおんがくをとおして、たくさんのひととであい、まいにちをもっとたのしくしたいです。
+      </p>
+    </div>
+
+    <div class="controls">
+      <a href="index.html" class="btn">⬅ Kembali</a>
+      <a href="dokkai-menu2.html" class="btn">Selanjutnya ➜</a>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgm" src="music.mp3" loop></audio>
+  <audio id="clickSound" src="pop.mp3"></audio>
+
+  <script>
+    const bgm = document.getElementById('bgm');
+    const clickSound = document.getElementById('clickSound');
+    const toggleBtn = document.getElementById('soundToggle');
+    let soundEnabled = true;
+
+    document.addEventListener('click', () => {
+      if (bgm.paused && soundEnabled) {
+        bgm.volume = 0.4;
+        bgm.play().catch(() => {});
+      }
+    }, { once: true });
+
+    toggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        toggleBtn.textContent = '🔊';
+        bgm.play().catch(()=>{});
+      } else {
+        toggleBtn.textContent = '🔇';
+        bgm.pause();
+      }
+      playClick();
+    });
+
+    function playClick() {
+      if (!soundEnabled) return;
+      clickSound.currentTime = 0;
+      clickSound.play().catch(()=>{});
+    }
+
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const href = btn.getAttribute('href');
+        playClick();
+        if (href) {
+          e.preventDefault();
+          setTimeout(() => {
+            window.location.href = href;
+          }, 150);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

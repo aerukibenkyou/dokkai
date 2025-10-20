@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Latihan Dokkai #1</title>
+  <link rel="stylesheet" href="asset/assetscss/style.css">
+  <style>
+    .wrap{max-width:900px;margin:36px auto;background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 30px var(--shadow)}
+    .question{padding:12px;border-radius:10px;margin-bottom:12px;background:rgba(255,255,255,0.7)}
+    .options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .options button{padding:10px;border-radius:8px;border:2px solid transparent;cursor:pointer;font-weight:600}
+    .submit{display:block;margin:16px auto;padding:12px 20px;border-radius:10px}
+    #soundToggle{
+      position:fixed;
+      top:15px;
+      right:15px;
+      font-size:24px;
+      background:none;
+      border:none;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tombol Sound -->
+  <button id="soundToggle">🔊</button>
+
+  <div class="menu wrap">
+
+     <div class="menu dokkai-wrap">
+    <h1>Dokkai — わたしのしゅみ</h1>
+    <p class="meta">Berisi kanji + hiragana (furigana). Baca cerita lalu tekan <strong>Selanjutnya</strong>.</p>
+
+    <div class="story-box" id="storyBox">
+      <p>
+        私の<ruby><rb>趣味</rb><rt>しゅみ</rt></ruby>はサッカーです。<br>
+        <ruby><rb>小</rb><rt>ちい</rt></ruby>さいころからサッカーを<ruby><rb>見</rb><rt>み</rt></ruby>ることが<ruby><rb>好</rb><rt>す</rt></ruby>きで、<br>
+        今も<ruby><rb>友</rb><rt>とも</rt></ruby>だちと<ruby><rb>毎週</rb><rt>まいしゅう</rt></ruby><ruby><rb>一緒</rb><rt>いっしょ</rt></ruby>に<ruby><rb>練習</rb><rt>れんしゅう</rt></ruby>しています。<br>
+        サッカーをすると、ストレスがなくなって、とても<ruby><rb>気持</rb><rt>きも</rt></ruby>ちがいいです。
+      </p>
+
+      <p>
+        サッカーのほかに、<ruby><rb>音楽</rb><rt>おんがく</rt></ruby>を<ruby><rb>聞</rb><rt>き</rt></ruby>くことも<ruby><rb>大好</rb><rt>だいす</rt></ruby>きです。<br>
+        とくに<ruby><rb>日本</rb><rt>にほん</rt></ruby>のポップスが<ruby><rb>好</rb><rt>す</rt></ruby>きで、よくスマホで<ruby><rb>聞</rb><rt>き</rt></ruby>きます。<br>
+        しずかな<ruby><rb>音楽</rb><rt>おんがく</rt></ruby>を<ruby><rb>聞</rb><rt>き</rt></ruby>くと、べんきょうのあとに<ruby><rb>疲</rb><rt>つか</rt></ruby>れがとれます。
+      </p>
+
+      <p>
+        これからは、ピアノを<ruby><rb>弾</rb><rt>ひ</rt></ruby>くことにもチャレンジしたいと<ruby><rb>思</rb><rt>おも</rt></ruby>います。<br>
+        サッカーや<ruby><rb>音楽</rb><rt>おんがく</rt></ruby>をとおして、たくさんの<ruby><rb>人</rb><rt>ひと</rt></ruby>と<ruby><rb>出会</rb><rt>であ</rt></ruby>い、<br>
+        <ruby><rb>毎日</rb><rt>まいにち</rt></ruby>をもっと<ruby><rb>楽</rb><rt>たの</rt></ruby>しくしたいです。
+      </p>
+
+      <hr>
+    </div>
+  </div>
+    <h1>Latihan — Dokkai #2</h1>
+    <p>Kerjakan 2 soal latihan terkait cerita.</p>
+
+    <div id="qContainer"></div>
+
+    <button id="submitBtn" class="btn submit">Kirim Jawaban</button>
+    <a href="dokkai-menu.html" class="btn">⬅ Kembali</a>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgm" src="music.mp3" loop></audio>
+  <audio id="clickSound" src="pop.mp3"></audio>
+
+  <script>
+    const bgm = document.getElementById('bgm');
+    const clickSound = document.getElementById('clickSound');
+    const toggleBtn = document.getElementById('soundToggle');
+    let soundEnabled = true;
+
+    // Autoplay musik setelah interaksi pertama
+    document.addEventListener('click', () => {
+      if (bgm.paused && soundEnabled) {
+        bgm.volume = 0.4;
+        bgm.play().catch(() => {});
+      }
+    }, { once: true });
+
+    // Tombol mute/unmute
+    toggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        toggleBtn.textContent = '🔊';
+        bgm.play().catch(()=>{});
+      } else {
+        toggleBtn.textContent = '🔇';
+        bgm.pause();
+      }
+      playClick();
+    });
+
+    // Fungsi suara klik
+    function playClick() {
+      if (!soundEnabled) return;
+      clickSound.currentTime = 0;
+      clickSound.play().catch(()=>{});
+    }
+
+    // Tambahkan suara ke tombol Kirim Jawaban
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('click', (e) => {
+      playClick();
+      // Biarkan latihan.js yang menangani logika submit,
+      // jadi kita TIDAK redirect di sini.
+    });
+
+    // Efek suara + delay ke tombol link (Kembali)
+    document.querySelectorAll('a.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const href = btn.getAttribute('href');
+        playClick();
+        if (href) {
+          e.preventDefault();
+          setTimeout(() => {
+            window.location.href = href;
+          }, 150);
+        }
+      });
+    });
+  </script>
+
+  <!-- JS soal -->
+  <script src="asset/assetsjs/latihan2.js"></script>
+</body>
+</html>

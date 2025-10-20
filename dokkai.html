@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dokkai - Cerita 1</title>
+  <title>Dokkai - 沖縄旅行</title>
   <link rel="stylesheet" href="asset/assetscss/style.css">
   <style>
     .dokkai-wrap{max-width:900px;margin:40px auto;background:var(--card);padding:20px;border-radius:14px;box-shadow:0 8px 30px var(--shadow);}
@@ -27,21 +27,48 @@
   <button id="soundToggle">🔊</button> <!-- tombol mute/unmute -->
 
   <div class="menu dokkai-wrap">
-    <h1>Dokkai — Cerita #1</h1>
+    <h1>Dokkai — 沖縄旅行</h1>
     <p class="meta">Berisi kanji + hiragana (furigana). Baca cerita lalu tekan <strong>Selanjutnya</strong>.</p>
 
     <div class="story-box" id="storyBox">
       <p>
-        <ruby><rb>春</rb><rt>はる</rt></ruby>の<ruby><rb>日</rb><rt>ひ</rt></ruby>、<ruby><rb>町</rb><rt>まち</rt></ruby>の小さな<ruby><rb>図書館</rb><rt>としょかん</rt></ruby>に行きました。<br>
-        そこには<ruby><rb>古</rb><rt>ふる</rt></ruby>い本がたくさんあり、私は<ruby><rb>静</rb><rt>しず</rt></ruby>かに読書をしました。<br>
-        窓から差し込む<ruby><rb>光</rb><rt>ひかり</rt></ruby>が暖かく、心が落ち着きました。
+        私は<ruby><rb>今年</rb><rt>ことし</rt></ruby>の3<ruby><rb>月</rb><rt>がつ</rt></ruby>に<ruby><rb>初</rb><rt>はじ</rt></ruby>めて<ruby><rb>沖縄</rb><rt>おきなわ</rt></ruby>へ行きました。<br>
+        <ruby><rb>大阪</rb><rt>おおさか</rt></ruby>からふねで行きました。38<ruby><rb>時間</rb><rt>じかん</rt></ruby>かかりました。<br>
+        それから1<ruby><rb>週間</rb><rt>しゅうかん</rt></ruby>旅行しました。<br>
+        毎日いい<ruby><rb>天気</rb><rt>てんき</rt></ruby>でしたが、少し<ruby><rb>暑</rb><rt>あつ</rt></ruby>かったです。
+      </p>
+
+      <p>
+        いろいろなところへ行きました。<br>
+        <ruby><rb>那覇</rb><rt>なは</rt></ruby>は沖縄で一番<ruby><rb>大</rb><rt>おお</rt></ruby>きい<ruby><rb>町</rb><rt>まち</rt></ruby>です。<br>
+        <ruby><rb>旅行者</rb><rt>りょこうしゃ</rt></ruby>がとても多かったです。<br>
+        <ruby><rb>台湾</rb><rt>たいわん</rt></ruby>や<ruby><rb>東南アジア</rb><rt>とうなんアジア</rt></ruby>の人もたくさんいました。<br>
+        <ruby><rb>店</rb><rt>みせ</rt></ruby>に<ruby><rb>珍</rb><rt>めずら</rt></ruby>しいものがたくさんありました。
+      </p>
+
+      <p>
+        <ruby><rb>海</rb><rt>うみ</rt></ruby>はほんとうにすばらしかったです。<br>
+        人はしんせつでした。<br>
+        沖縄の<ruby><rb>料理</rb><rt>りょうり</rt></ruby>はおいしかったです。<br>
+        それに沖縄の<ruby><rb>音楽</rb><rt>おんがく</rt></ruby>もすてきでした。
+      </p>
+
+      <p>
+        沖縄<ruby><rb>旅行</rb><rt>りょこう</rt></ruby>はとても楽しかったです。<br>
+        わたしは沖縄が<ruby><rb>大好</rb><rt>だいす</rt></ruby>きです。
       </p>
 
       <hr>
 
       <p>
         <strong>Transliterasi (hiragana):</strong><br>
-        はるのひ、まちのちいさなとしょかんにいきました。そこにはふるいほんがたくさんあり、わたしはしずかによみました。まどからさしこむひかりがあたたかく、こころがおちつきました。
+        わたしはことしのさんがつにはじめておきなわへいきました。おおさかからふねでいきました。さんじゅうはちじかんかかりました。
+        それからいっしゅうかんりょこうしました。まいにちいいてんきでしたが、すこしあつかったです。<br><br>
+        いろいろなところへいきました。なははおきなわでいちばんおおきいまちです。りょこうしゃがとてもおおかったです。
+        たいわんやとうなんアジアのひともたくさんいました。みせにめずらしいものがたくさんありました。<br><br>
+        うみはほんとうにすばらしかったです。ひとはしんせつでした。おきなわのりょうりはおいしかったです。
+        それにおきなわのおんがくもすてきでした。<br><br>
+        おきなわりょこうはとてもたのしかったです。わたしはおきなわがだいすきです。
       </p>
     </div>
 
@@ -51,7 +78,7 @@
     </div>
   </div>
 
-  <!-- Tambahkan Audio -->
+  <!-- Audio -->
   <audio id="bgm" src="music.mp3" loop></audio>
   <audio id="clickSound" src="pop.mp3"></audio>
 
@@ -61,7 +88,6 @@
     const toggleBtn = document.getElementById('soundToggle');
     let soundEnabled = true;
 
-    // Autoplay musik setelah interaksi pertama
     document.addEventListener('click', () => {
       if (bgm.paused && soundEnabled) {
         bgm.volume = 0.4;
@@ -69,7 +95,6 @@
       }
     }, { once: true });
 
-    // Tombol mute/unmute
     toggleBtn.addEventListener('click', () => {
       soundEnabled = !soundEnabled;
       if (soundEnabled) {
@@ -82,14 +107,12 @@
       playClick();
     });
 
-    // Fungsi suara klik
     function playClick() {
       if (!soundEnabled) return;
       clickSound.currentTime = 0;
       clickSound.play().catch(()=>{});
     }
 
-    // Efek suara ke semua tombol .btn
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const href = btn.getAttribute('href');
@@ -102,8 +125,6 @@
         }
       });
     });
-
-
   </script>
 </body>
 </html>

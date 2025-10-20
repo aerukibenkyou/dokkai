@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pengaturan</title>
+  <link rel="stylesheet" href="asset/assetscss/style.css">
+</head>
+<body>
+
+<!-- Tombol Sound Wajib -->
+<button id="soundToggle" class="sound-btn">🔊</button>
+
+<div class="menu">
+  <h1>Pengaturan</h1>
+
+  <h3>Ganti Tema Warna</h3>
+  <div class="buttons">
+    <button class="btn theme-btn" data-theme="pink">Pink Pastel</button>
+    <button class="btn theme-btn" data-theme="green">Hijau Pastel</button>
+    <button class="btn theme-btn" data-theme="blue">Biru Pastel</button>
+    <button class="btn theme-btn" data-theme="yellow">Kuning Pastel</button>
+  </div>
+
+  <h3 style="margin-top:20px;">Pengaturan Suara</h3>
+  <button id="muteBtn" class="btn">Matikan Suara</button>
+
+  <div style="margin-top:30px;">
+    <a href="index.html" class="btn">⬅ Kembali ke Menu</a>
+  </div>
+</div>
+
+<!-- Musik & efek klik -->
+<audio id="bgm" src="music.mp3" loop></audio>
+<audio id="clickSound" src="pop.mp3"></audio>
+
+<script src="asset/assetsjs/settings.js"></script>
+</body>
+</html>

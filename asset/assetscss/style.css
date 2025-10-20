@@ -3,12 +3,12 @@
 
 :root{
   /* --- Palet Pink Pastel --- */
-  --bg:     #FFE6EF;  /* latar pink pastel sangat lembut */
-  --card:   #FFD1E0;  /* kotak/menu pink pastel sedikit lebih pekat */
-  --accent: #F7BFD8;  /* tombol pink pastel utama */
-  --click:  #F59ABF;  /* pink pastel lebih gelap untuk efek klik */
-  --shadow: #F4B5C9;  /* bayangan pink lembut */
-  --text:   #4A3A3A;  /* teks gelap agar tetap terbaca */
+  --bg:     #FFE6EF;
+  --card:   #FFD1E0;
+  --accent: #F7BFD8;
+  --click:  #F59ABF;
+  --shadow: #F4B5C9;
+  --text:   #4A3A3A;
 }
 
 *{
@@ -25,6 +25,7 @@ body{
   justify-content:center;
   min-height:100vh;
   padding:24px;
+  position: relative; /* penting untuk z-index */
 }
 
 .menu{
@@ -35,6 +36,8 @@ body{
   padding:24px;
   box-shadow:0 6px 30px var(--shadow);
   text-align:center;
+  position: relative;
+  z-index: 1;
 }
 
 h1{
@@ -54,7 +57,7 @@ h1{
   min-width:120px;
   padding:40px 0;
   border-radius:16px;
-  background:var(--accent);   /* tombol pink lembut */
+  background:var(--accent);
   color:var(--text);
   font-size:20px;
   font-weight:600;
@@ -66,14 +69,12 @@ h1{
   user-select:none;
 }
 
-/* Hover – sedikit redup */
 .btn:hover{
   background:var(--accent);
   opacity:0.9;
   transform:translateY(-4px);
 }
 
-/* Klik/active – pink lebih gelap */
 .btn:active{
   background:var(--click);
   color:white;
@@ -84,4 +85,105 @@ footer{
   margin-top:20px;
   color:#7a5b5b;
   font-size:14px;
+}
+
+/* Tombol sound toggle / settings */
+.sound-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px var(--shadow);
+  transition: all 0.2s;
+  z-index: 9999;     /* SUPAYA MUNCUL DI ATAS */
+}
+
+.sound-btn:hover {
+  background: var(--click);
+  color: white;
+  transform: scale(1.1);
+}
+.hidden {
+  display: none;
+}
+
+/* Panel Pengaturan */
+.settings {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--card);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px var(--shadow);
+  z-index: 999;
+  width: 300px;
+  text-align: center;
+}
+
+.setting-row {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.small-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.theme-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.theme-btn {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--accent);
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background: var(--click);
+  color: white;
+  cursor: pointer;
+}
+
+/* Pastikan body relatif */
+body {
+  position: relative;
+}
+
+/* Gambar karakter */
+.chara-samping {
+  position: absolute;
+  right: 0;              /* sisi kanan layar */
+  bottom: 0;             /* sejajar bawah */
+  width: 250px;          /* sesuaikan ukuran */
+  pointer-events: none;  /* biar tidak ganggu klik tombol */
+  z-index: 5;
+}
+
+/* Kalau mau terlihat nyempil di belakang box menu */
+.menu {
+  position: relative;
+  z-index: 10;           /* lebih tinggi dari gambar */
 }

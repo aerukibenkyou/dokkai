@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="id">
 <head>
@@ -6,85 +5,51 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Menu Utama - Tebak Gambar</title>
   <link rel="stylesheet" href="asset/assetscss/style.css">
-  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-  <!-- Tombol Sound (Wajib agar JS tidak error) -->
-  <button id="soundToggle" class="sound-btn">🔊</button>
+  <!-- Tombol Sound -->
+  <button id="soundToggle" class="sound-btn">⚙️</button>
 
   <div class="menu">
     <h1>Menu Utama</h1>
     <div class="buttons">
-      <a href="name.html" id="nameBtn" class="btn">Mulai</a>
-      <a href="kotoba.html" id="kotobaBtn" class="btn">Kotoba</a>
-      <a href="scoreboard.html" id="gambarBtn" class="btn">Score</a>
-      <a href="petunjuk.html" id="petunjukBtn" class="btn">Petunjuk</a>
+      <a href="name.html" class="btn">Mulai</a>
+      <a href="kotoba.html" class="btn">Kotoba</a>
+      <a href="scoreboard.html" class="btn">Score</a>
+      <a href="petunjuk.html" class="btn">Petunjuk</a>
     </div>
     <footer>
       Pilih menu untuk memulai permainan atau melihat informasi lain.
     </footer>
   </div>
+<img src="chara.png" alt="chara" class="chara-samping">
+  <!-- PANEL PENGATURAN -->
+  <div id="settingsPanel" class="settings hidden">
+    <h2>Pengaturan</h2>
 
-  <!-- Musik & efek suara -->
+    <div class="setting-row">
+      <span>Suara:</span>
+      <button id="muteBtn" class="small-btn">On</button>
+    </div>
+
+    <div class="setting-row">
+      <span>Tema:</span>
+      <div class="theme-buttons">
+        <button class="theme-btn" data-theme="pink">Pink</button>
+        <button class="theme-btn" data-theme="green">Hijau</button>
+        <button class="theme-btn" data-theme="blue">Biru</button>
+        <button class="theme-btn" data-theme="yellow">Kuning</button>
+      </div>
+    </div>
+
+    <button id="closeSettings" class="close-btn">Tutup</button>
+  </div>
+
+  <!-- Musik & Efek -->
   <audio id="bgm" src="music.mp3" loop></audio>
   <audio id="clickSound" src="pop.mp3"></audio>
 
   <script src="asset/assetsjs/scripct.js"></script>
-
-  <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-    .then(reg => console.log('Service Worker terdaftar:', reg.scope))
-    .catch(err => console.error('SW gagal:', err));
-}
-
-    const bgm = document.getElementById('bgm');
-    const clickSound = document.getElementById('clickSound');
-    const toggleBtn = document.getElementById('soundToggle');
-    let soundEnabled = true;
-
-    // Autoplay musik setelah interaksi pertama
-    document.addEventListener('click', () => {
-      if (bgm.paused && soundEnabled) {
-        bgm.volume = 0.4;
-        bgm.play().catch(() => {});
-      }
-    }, { once: true });
-
-    // Tombol mute/unmute
-    toggleBtn.addEventListener('click', () => {
-      soundEnabled = !soundEnabled;
-      if (soundEnabled) {
-        toggleBtn.textContent = '🔊';
-        bgm.play().catch(()=>{});
-      } else {
-        toggleBtn.textContent = '🔇';
-        bgm.pause();
-      }
-      playClick();
-    });
-
-    // Fungsi mainkan efek pop
-    function playClick() {
-      if (!soundEnabled) return;
-      clickSound.currentTime = 0;
-      clickSound.play().catch(()=>{});
-    }
-
-    // Tambahkan efek suara dan delay ke semua tombol <a class="btn">
-    document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();     // cegah pindah halaman langsung
-        playClick();            // mainkan suara
-        const href = btn.getAttribute('href');
-        setTimeout(() => {
-          window.location.href = href;  // pindah halaman setelah suara
-        }, 150); // delay 150ms
-      });
-    });
-    
-  </script>
-
 </body>
 </html>
