@@ -201,7 +201,7 @@
     // simpan ke localStorage (format seperti sebelumnya)
     const entry = {
       nama: playerName || 'Anonymous',
-      tipe: 'Latihan Dokkai 1 (TF)',
+      tipe: 'Latihan Dokkai 2 (TF)',
       score: score,
       max: 100,
       detail: answers,

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quiz Dokkai #1</title>
+  <link rel="stylesheet" href="asset/assetscss/style.css">
+  <style>
+    .wrap{max-width:1000px;margin:28px auto;background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 30px var(--shadow)}
+    .question{padding:12px;border-radius:10px;margin-bottom:12px;background:rgba(255,255,255,0.75)}
+    .options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .options button{padding:10px;border-radius:8px;border:2px solid transparent;cursor:pointer;font-weight:600}
+    .submit{display:block;margin:16px auto;padding:12px 20px;border-radius:10px}
+  </style>
+</head>
+<body>
+  <div class="menu wrap">
+    <h1>Quiz — Dokkai #2</h1>
+    <p>Jawab 5 soal pilihan ganda.</p>
+
+    <div id="quizContainer"></div>
+
+    <button id="submitQuiz" class="btn submit">Kirim Jawaban</button>
+    <a href="dokkai-menu.html2" class="btn">⬅ Kembali</a>
+  </div>
+
+  <script src="asset/assetsjs/quiz2.js"></script>
+</body>
+</html>

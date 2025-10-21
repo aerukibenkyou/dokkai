@@ -2,15 +2,15 @@
 const guides = [
   {
     title: "Game",
-    desc: "Mulai permainan Tebak Gambar. Lihat gambar yang ditampilkan dan pilih jawaban yang benar dari pilihan yang tersedia."
+    desc: "Mulai Dokkai. Lihat dan baca dokkai yang ditampilkan dan pilih jawaban yang benar dari pilihan yang tersedia."
   },
   {
     title: "Materi",
-    desc: "Pelajari kosakata. Berisi daftar nama hewan, buah-buahan, hobi, dan organ tubuh dalam bahasa Indonesia dan Jepang (beserta romaji)."
+    desc: "Pelajari kosakata.  bahasa Jepang (beserta romaji)."
   },
   {
     title: "Score",
-    desc: "Lihat skor tertinggi yang pernah kamu capai selama bermain. Papan skor akan menampilkan nama pemain dan poin."
+    desc: "Lihat skor tertinggi yang pernah kamu capai  . Papan skor akan menampilkan nama pemain dan poin."
   },
   {
     title: "Petunjuk",
@@ -18,7 +18,7 @@ const guides = [
   },
   {
     title: "Cara Bermain",
-    desc: "1) Tekan menu Game.\n2) Amati gambar yang muncul.\n3) Pilih jawaban yang benar sebelum waktu habis untuk mendapatkan poin.\n4) Kumpulkan skor setinggi mungkin!"
+    desc: "1) Tekan menu Mulai.\n2) isi nama.\n3) Baca dokkai dan selesaikan latihan dan quiz.\n4) Pilih jawaban yang benar untuk mendapatkan poin!"
   }
 ];
 

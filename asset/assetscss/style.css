@@ -179,11 +179,11 @@ body {
   bottom: 0;             /* sejajar bawah */
   width: 250px;          /* sesuaikan ukuran */
   pointer-events: none;  /* biar tidak ganggu klik tombol */
-  z-index: 5;
+  z-index: 1;
 }
 
 /* Kalau mau terlihat nyempil di belakang box menu */
 .menu {
   position: relative;
-  z-index: 10;           /* lebih tinggi dari gambar */
+  z-index: 1;           /* lebih tinggi dari gambar */
 }
