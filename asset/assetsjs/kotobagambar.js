@@ -41,114 +41,114 @@ const fruits = [
     kanji: 'うみ',
     translation: 'Laut.'
   },{
-    src: 'asset/img/010.jpeg',
+    src: 'asset/img/10.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },{
-    src: 'asset/img/011.jpeg',
+    src: 'asset/img/11.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },{
-    src: 'asset/img/012.jpeg',
+    src: 'asset/img/12.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },{
-    src: 'asset/img/013.jpeg',
+    src: 'asset/img/13.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/014.jpeg',
+    src: 'asset/img/14.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/015.jpeg',
+    src: 'asset/img/15.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/016.jpeg',
+    src: 'asset/img/16.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/017.jpeg',
+    src: 'asset/img/17.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/018.jpeg',
+    src: 'asset/img/18.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/019.jpeg',
+    src: 'asset/img/19.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/020.jpeg',
+    src: 'asset/img/20.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/021.jpeg',
+    src: 'asset/img/21.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/022.jpeg',
+    src: 'asset/img/22.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/023.jpeg',
+    src: 'asset/img/23.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/024.jpeg',
+    src: 'asset/img/24.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/025.jpeg',
+    src: 'asset/img/25.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/026.jpeg',
+    src: 'asset/img/26.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/027.jpeg',
+    src: 'asset/img/27.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/028.jpeg',
+    src: 'asset/img/28.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/029.jpeg',
+    src: 'asset/img/29.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/030.jpeg',
+    src: 'asset/img/30.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/031.jpeg',
+    src: 'asset/img/31.jpeg',
     kanji: 'スイカ（西瓜）',
     translation: 'Semangka — buah besar hijau, daging merah berair.'
   },
   {
-    src: 'asset/img/032.jpeg',
+    src: 'asset/img/32.jpeg',
     kanji: 'ドリアン',
     translation: 'Durian — dikenal sebagai raja buah, beraroma kuat.'
   }
