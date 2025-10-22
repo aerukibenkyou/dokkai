@@ -46,91 +46,91 @@ const fruits = [
     translation: 'Toko.'
   },{
     src: 'asset/img/11.jpeg',
+    kanji: 'ところ',
+    translation: 'Tempat.'
+  },{
+    src: 'asset/img/12.jpeg',
     kanji: 'まち',
     translation: 'Kota.'
   },{
-    src: 'asset/img/12.jpeg',
+    src: 'asset/img/13.jpeg',
     kanji: 'てんき',
     translation: 'Cuaca.'
-  },{
-    src: 'asset/img/13.jpeg',
+  },
+  {
+    src: 'asset/img/14.jpeg',
     kanji: 'すこし',
     translation: 'Sedikit.'
   },
   {
-    src: 'asset/img/14.jpeg',
+    src: 'asset/img/15.jpeg',
     kanji: 'じかん',
     translation: 'Waktu.'
   },
   {
-    src: 'asset/img/15.jpeg',
+    src: 'asset/img/16.jpeg',
     kanji: 'しゅうかん',
     translation: 'Minggu.'
   },
   {
-    src: 'asset/img/16.jpeg',
+    src: 'asset/img/17.jpeg',
     kanji: 'ふね',
     translation: 'Kapal.'
   },
   {
-    src: 'asset/img/17.jpeg',
+    src: 'asset/img/18.jpeg',
     kanji: 'ともだち',
     translation: 'Teman.'
   },
   {
-    src: 'asset/img/18.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
-  },
-  {
     src: 'asset/img/19.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'ことし',
+    translation: 'Tahun ini.'
   },
   {
     src: 'asset/img/20.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'べんきょうする',
+    translation: 'Belajar.'
   },
   {
     src: 'asset/img/21.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'つかれる',
+    translation: 'Lelah.'
   },
   {
     src: 'asset/img/22.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'サッカー',
+    translation: 'Sepak Bola.'
   },
   {
     src: 'asset/img/23.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'こうこうせい',
+    translation: 'Murid SMA.'
   },
   {
     src: 'asset/img/24.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'バスケットボール',
+    translation: 'Basket.'
   },
   {
     src: 'asset/img/25.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'きく',
+    translation: 'Mendengar.'
   },
   {
     src: 'asset/img/26.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'りんご',
+    translation: 'Apel.'
   },
   {
     src: 'asset/img/27.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'みる',
+    translation: 'Melihat.'
   },
   {
     src: 'asset/img/28.jpeg',
-    kanji: 'スイカ（西瓜）',
-    translation: '1.'
+    kanji: 'かかる',
+    translation: 'Memakan (Waktu).'
   }
   
 ];
