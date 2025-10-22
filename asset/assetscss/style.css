@@ -175,9 +175,10 @@ body {
 /* Gambar karakter */
 .chara-samping {
   position: absolute;
-  right: 0;              /* sisi kanan layar */
-  bottom: 0;             /* sejajar bawah */
-  width: 250px;          /* sesuaikan ukuran */
+  right: 10vh;  
+  left: 0;            /* sisi kanan layar */
+  top: 0;             /* sejajar bawah */
+  width: 150px;          /* sesuaikan ukuran */
   pointer-events: none;  /* biar tidak ganggu klik tombol */
   z-index: 1;
 }
@@ -185,5 +186,5 @@ body {
 /* Kalau mau terlihat nyempil di belakang box menu */
 .menu {
   position: relative;
-  z-index: 1;           /* lebih tinggi dari gambar */
+  z-index: 10;           /* lebih tinggi dari gambar */
 }

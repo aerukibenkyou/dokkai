@@ -18,7 +18,7 @@ const guides = [
   },
   {
     title: "Cara Bermain",
-    desc: "1) Tekan menu Mulai.\n2) isi nama.\n3) Baca dokkai dan selesaikan latihan dan quiz.\n4) Pilih jawaban yang benar untuk mendapatkan poin!"
+    desc: "1) Tekan menu Dokkai.\n2) isi nama.\n3) Baca dokkai dan selesaikan latihan dan quiz.\n4) Pilih jawaban yang benar untuk mendapatkan poin!"
   }
 ];
 
